@@ -1,5 +1,5 @@
 {
-  "name": "am4-config-be",
+  "name": "am4-easy-routing",
   "version": "1.0.0",
   "description": "Help players to configure the AM4 game (airlinemanager.com)",
   "main": "index.js",
@@ -12,5 +12,8 @@
     "airlinemanager"
   ],
   "author": "Reginaldo Santos (reginaldosantos.br@gmail.com)",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.9.4"
+  }
 }
