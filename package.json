@@ -4,7 +4,7 @@
   "description": "Help players to configure the AM4 game (airlinemanager.com)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [
     "node-js",
@@ -14,9 +14,13 @@
   "author": "Reginaldo Santos (reginaldosantos.br@gmail.com)",
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^29.2.5",
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "@typescript-eslint/parser": "^5.48.2",
     "eslint": "^8.32.0",
+    "jest": "^29.3.1",
+    "ts-jest": "^29.0.5",
+    "ts-node": "^10.9.1",
     "typescript": "^4.9.4"
   }
 }
