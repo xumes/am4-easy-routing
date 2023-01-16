@@ -1,0 +1,16 @@
+{
+  "name": "am4-config-be",
+  "version": "1.0.0",
+  "description": "Help players to configure the AM4 game (airlinemanager.com)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node-js",
+    "am4",
+    "airlinemanager"
+  ],
+  "author": "Reginaldo Santos (reginaldosantos.br@gmail.com)",
+  "license": "ISC"
+}
