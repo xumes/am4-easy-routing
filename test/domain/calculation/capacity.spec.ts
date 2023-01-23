@@ -23,6 +23,29 @@ describe('Capacity Calculation', () => {
         }).toThrow('Capacity must be positive')
      })
 
+     it('should throw an error when capacity is not provided', () => {
+      const demand = 10
+      const capacity = null
+      
+      const capacityCalculation = new CapacityCalculation()
+
+      expect( () => {
+           capacityCalculation.calculate(demand, capacity as any)
+      }).toThrow('Capacity must be positive')
+    })
+
+    it('should throw an error when capacity is not provided', () => {
+      const demand = 10
+      const capacity = undefined
+      
+      const capacityCalculation = new CapacityCalculation()
+
+      expect( () => {
+           capacityCalculation.calculate(demand, capacity as any)
+      }).toThrow('Capacity must be positive')
+    })
+
+
      it('should return the correct value on succes', () => {
         const demand = 1556
         const capacity = 600
