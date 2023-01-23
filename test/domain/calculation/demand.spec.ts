@@ -39,6 +39,32 @@ describe('Demand calculation', () => {
             demandCalculation.calculate(economicDemand, businessDemand, firstClassDemand)
         }).toThrow('Demand cannot be negative')
     })
+    
+    it('should throw an error when no economid demand is provided', () => {
+        //Arrange
+        const economicDemand = null
+        const businessDemand = 1
+        const firstClassDemand = -1
+
+        const demandCalculation = new DemandCalculation()
+
+        expect(() => {
+            demandCalculation.calculate(economicDemand as any, businessDemand, firstClassDemand)
+        }).toThrow('Demand cannot be negative')
+    })
+
+    it('should throw an error when no economid demand is provided', () => {
+        //Arrange
+        const economicDemand = undefined
+        const businessDemand = 1
+        const firstClassDemand = -1
+
+        const demandCalculation = new DemandCalculation()
+
+        expect(() => {
+            demandCalculation.calculate(economicDemand as any, businessDemand, firstClassDemand)
+        }).toThrow('Demand cannot be negative')
+    })
 
     it('should return a result when all demand data is provided', () => {
         const economicDemand = 2
