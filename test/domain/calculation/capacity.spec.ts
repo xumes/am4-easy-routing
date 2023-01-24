@@ -1,4 +1,4 @@
-import { CapacityCalculation } from "../../../src/domain/calculation/capacity"
+import { CapacityCalculation, CapacityProps } from "../../../src/domain/calculation/capacity"
 
 describe('Capacity Calculation', () => {
     it('should throw an error when capacity is <=0', () => {
@@ -8,7 +8,7 @@ describe('Capacity Calculation', () => {
        const capacityCalculation = new CapacityCalculation()
 
        expect( () => {
-            capacityCalculation.calculate(demand, capacity)
+            capacityCalculation.calculate({capacity, demand})
        }).toThrow('Capacity must be positive')
     })
 
@@ -19,7 +19,7 @@ describe('Capacity Calculation', () => {
         const capacityCalculation = new CapacityCalculation()
  
         expect( () => {
-             capacityCalculation.calculate(demand, capacity)
+             capacityCalculation.calculate({capacity, demand})
         }).toThrow('Capacity must be positive')
      })
 
@@ -30,7 +30,7 @@ describe('Capacity Calculation', () => {
       const capacityCalculation = new CapacityCalculation()
 
       expect( () => {
-           capacityCalculation.calculate(demand, capacity as any)
+           capacityCalculation.calculate({capacity: capacity as any, demand})
       }).toThrow('Capacity must be positive')
     })
 
@@ -41,7 +41,7 @@ describe('Capacity Calculation', () => {
       const capacityCalculation = new CapacityCalculation()
 
       expect( () => {
-           capacityCalculation.calculate(demand, capacity as any)
+           capacityCalculation.calculate({capacity: capacity as any, demand})
       }).toThrow('Capacity must be positive')
     })
 
@@ -52,7 +52,7 @@ describe('Capacity Calculation', () => {
 
         const capacityCalculation = new CapacityCalculation()
 
-        const result = capacityCalculation.calculate(demand, capacity)
+        const result = capacityCalculation.calculate({capacity: capacity as any, demand})
 
         const expectedResult = (1556/600)
 
@@ -65,8 +65,10 @@ describe('Capacity Calculation', () => {
 
         const capacityCalculation = new CapacityCalculation()
 
-        const result = capacityCalculation.calculate(demand, capacity)
+        const result = capacityCalculation.calculate({capacity: capacity as any, demand})
 
         expect(result).toBe(0)
      })
+
+
 })

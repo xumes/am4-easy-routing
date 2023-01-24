@@ -10,7 +10,7 @@ describe('Demand calculation', () => {
         const demandCalculation = new DemandCalculation()
 
         expect(() => {
-            demandCalculation.calculate(economicDemand, businessDemand, firstClassDemand)
+            demandCalculation.calculate({economicDemand, businessDemand, firstClassDemand})
         }).toThrow('Demand cannot be negative')
     })
 
@@ -23,7 +23,7 @@ describe('Demand calculation', () => {
         const demandCalculation = new DemandCalculation()
 
         expect(() => {
-            demandCalculation.calculate(economicDemand, businessDemand, firstClassDemand)
+            demandCalculation.calculate({economicDemand, businessDemand, firstClassDemand})
         }).toThrow('Demand cannot be negative')
     })
 
@@ -36,7 +36,7 @@ describe('Demand calculation', () => {
         const demandCalculation = new DemandCalculation()
 
         expect(() => {
-            demandCalculation.calculate(economicDemand, businessDemand, firstClassDemand)
+            demandCalculation.calculate({economicDemand, businessDemand, firstClassDemand})
         }).toThrow('Demand cannot be negative')
     })
     
@@ -49,7 +49,7 @@ describe('Demand calculation', () => {
         const demandCalculation = new DemandCalculation()
 
         expect(() => {
-            demandCalculation.calculate(economicDemand as any, businessDemand, firstClassDemand)
+            demandCalculation.calculate({economicDemand: economicDemand as any, businessDemand, firstClassDemand})
         }).toThrow('Demand cannot be negative')
     })
 
@@ -62,7 +62,7 @@ describe('Demand calculation', () => {
         const demandCalculation = new DemandCalculation()
 
         expect(() => {
-            demandCalculation.calculate(economicDemand as any, businessDemand, firstClassDemand)
+            demandCalculation.calculate({economicDemand: economicDemand as any, businessDemand, firstClassDemand})
         }).toThrow('Demand cannot be negative')
     })
 
@@ -73,7 +73,7 @@ describe('Demand calculation', () => {
 
         const demandCalculation = new DemandCalculation()
 
-        const demand = demandCalculation.calculate(economicDemand, businessDemand, firstClassDemand)
+        const demand = demandCalculation.calculate({economicDemand: economicDemand as any, businessDemand, firstClassDemand})
 
         expect(demand).toBe(12)
     })
@@ -85,7 +85,7 @@ describe('Demand calculation', () => {
 
         const demandCalculation = new DemandCalculation()
 
-        const demand = demandCalculation.calculate(economicDemand, businessDemand, firstClassDemand)
+        const demand = demandCalculation.calculate({economicDemand, businessDemand, firstClassDemand})
 
         expect(demand).toBe(18)
     })
@@ -97,7 +97,7 @@ describe('Demand calculation', () => {
 
         const demandCalculation = new DemandCalculation()
 
-        const demand = demandCalculation.calculate(economicDemand, businessDemand, firstClassDemand)
+        const demand = demandCalculation.calculate({economicDemand, businessDemand, firstClassDemand})
 
         expect(demand).toBe(0)
     })
@@ -109,7 +109,7 @@ describe('Demand calculation', () => {
 
         const demandCalculation = new DemandCalculation()
 
-        const demand = demandCalculation.calculate(economicDemand, businessDemand, firstClassDemand)
+        const demand = demandCalculation.calculate({economicDemand, businessDemand, firstClassDemand})
 
         expect(demand).toBe(1)
     })
@@ -121,7 +121,7 @@ describe('Demand calculation', () => {
 
         const demandCalculation = new DemandCalculation()
 
-        const demand = demandCalculation.calculate(economicDemand, businessDemand, firstClassDemand)
+        const demand = demandCalculation.calculate({economicDemand, businessDemand, firstClassDemand})
 
         expect(demand).toBe(2)
     })
@@ -133,7 +133,7 @@ describe('Demand calculation', () => {
 
         const demandCalculation = new DemandCalculation()
 
-        const demand = demandCalculation.calculate(economicDemand, businessDemand, firstClassDemand)
+        const demand = demandCalculation.calculate({economicDemand, businessDemand, firstClassDemand})
 
         expect(demand).toBe(3)
     })
