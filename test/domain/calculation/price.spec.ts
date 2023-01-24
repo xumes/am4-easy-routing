@@ -14,7 +14,7 @@ describe('Price calculation', () => {
 
         expect(() => {
             dataToTest.forEach(item => {
-                priceCalculation.calculate(item.gameMode as any, item.distance, item.type)
+                priceCalculation.calculate({gameMode: item.gameMode as any, distance: item.distance, type: item.type})
             })
         }).toThrow(new Error('GameMode is required'))
     })
@@ -30,7 +30,7 @@ describe('Price calculation', () => {
 
         expect(() => {
             dataToTest.forEach(item => {
-                priceCalculation.calculate(item.gameMode, item.distance, item.type as any)
+                priceCalculation.calculate({gameMode: item.gameMode, distance: item.distance, type: item.type as any})
             })
         }).toThrow(new Error('Seat Type is required'))
     })
@@ -46,7 +46,7 @@ describe('Price calculation', () => {
 
         expect(() => {
             dataToTest.forEach(item => {
-                priceCalculation.calculate(item.gameMode, item.distance as any, item.type)
+                priceCalculation.calculate({gameMode: item.gameMode, distance: item.distance as any, type: item.type})
             })
         }).toThrow(new Error('Distance must be positive'))
     })
@@ -67,7 +67,7 @@ describe('Price calculation', () => {
         const priceCalculation = new PriceCalculation()
         
         dataToTest.forEach(item => {
-            const result = priceCalculation.calculate(item.gameMode, item.distance, item.type)
+            const result = priceCalculation.calculate({gameMode: item.gameMode, distance: item.distance, type: item.type})
 
             expect(result).toBe(item.expectedResult)
         });

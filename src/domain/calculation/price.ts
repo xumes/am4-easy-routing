@@ -1,8 +1,17 @@
 import { GameMode } from "../../shared/game-mode"
 import { SeatCategory } from "../../shared/seat-category"
+import { CalculationInterface } from "../interfaces/calculation-interface"
 
-export class PriceCalculation {
-    calculate(gameMode: GameMode, distance: number, type: SeatCategory): number {
+type PriceProps = {
+    gameMode: GameMode,
+    distance: number,
+    type: SeatCategory
+}
+
+export class PriceCalculation implements CalculationInterface<PriceProps> {
+    calculate(value: PriceProps): number {
+        const {gameMode, distance, type} = value
+
         let result: number
 
         if(!gameMode) {
