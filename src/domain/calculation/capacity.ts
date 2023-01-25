@@ -12,7 +12,6 @@ export class CapacityCalculation implements CalculationInterface<CapacityProps> 
             throw new Error('Capacity must be positive')
         }
 
-        const {} = value
-        return demand / capacity
+        return Math.floor(demand / capacity)
     }
 }
