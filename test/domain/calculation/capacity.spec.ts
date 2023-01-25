@@ -1,4 +1,4 @@
-import { CapacityCalculation, CapacityProps } from "../../../src/domain/calculation/capacity"
+import { CapacityCalculation } from "../../../src/domain/calculation/capacity"
 
 describe('Capacity Calculation', () => {
     it('should throw an error when capacity is <=0', () => {
