@@ -54,9 +54,8 @@ describe('Capacity Calculation', () => {
 
         const result = capacityCalculation.calculate({capacity: capacity as any, demand})
 
-        const expectedResult = (1556/600)
 
-        expect(result).toBe(expectedResult)
+        expect(result).toBe(2)
      })
 
      it('should return zero when there is no demand', () => {
