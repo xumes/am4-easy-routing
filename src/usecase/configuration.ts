@@ -1,5 +1,8 @@
 import { CapacityCalculation } from "../domain/calculation/capacity"
+import { ConfigurationCalculation } from "../domain/calculation/configuration"
 import { DemandCalculation } from "../domain/calculation/demand"
+import { UnusedDemandCalculation } from "../domain/calculation/unused-demand"
+import { SeatCategory } from "../shared/seat-category"
 
 type Demand = {
     economy: number,
@@ -14,7 +17,12 @@ type SuggestedConfig = {
 }
 
 export class ConfigurationUsecase {
-    constructor(private readonly capacityCalculation: CapacityCalculation, private readonly demandCalculation: DemandCalculation) {}
+    constructor(
+        private readonly capacityCalculation: CapacityCalculation,
+        private readonly demandCalculation: DemandCalculation,
+        private readonly configurationCalculation: ConfigurationCalculation,
+        private readonly unusedDemandCalculation: UnusedDemandCalculation
+    ) {}
 
     execute(seats: number, airportDemand: Demand): SuggestedConfig {
 
@@ -29,18 +37,16 @@ export class ConfigurationUsecase {
             demand: demandTotal
         })
 
-        // Refactor the following code to move them to the domain
         let unusedDemand: number = seats
+        this.unusedDemandCalculation.setFreeSeats(seats)
 
-        const firstClassConfiguration = Math.floor(
-            airportDemand.firstClass / capacityTotal
-        )
-        unusedDemand = unusedDemand - (firstClassConfiguration * 3)
+        this.configurationCalculation.setCapacityTotal(capacityTotal) // eu seto este valor apenas uma vez
 
-        const businessConfiguration = Math.floor(
-            airportDemand.business / capacityTotal
-        )
-        unusedDemand = unusedDemand - ( businessConfiguration * 2)
+        const firstClassConfiguration = this.configurationCalculation.calculate(airportDemand.firstClass)
+        unusedDemand =this.unusedDemandCalculation.calculate({seats: firstClassConfiguration, type: SeatCategory.FIRST_CLASS})
+
+        const businessConfiguration = this.configurationCalculation.calculate(airportDemand.business)
+        unusedDemand = this.unusedDemandCalculation.calculate({seats: businessConfiguration, type: SeatCategory.BUSINESS})
 
         const config = [
             { economy: unusedDemand, business: businessConfiguration, firstClass: firstClassConfiguration },
