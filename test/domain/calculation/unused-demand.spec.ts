@@ -12,7 +12,7 @@ describe('Unused Demand Calculation', () => {
 
         const result = unusedDemandCalculation.calculate({seats, type})
 
-        expect(result).toBe(20)
+        expect(result).toBe(80)
     })
 
     it('it should calculate business type the unused seats on success', () => {
@@ -38,4 +38,18 @@ describe('Unused Demand Calculation', () => {
 
         expect(result).toBe(40)
     })
+
+    it('it should return 1 when there is only one available seat', () => {
+        const initialFreeSeats = 51
+        const seats = 10
+
+        const unusedDemandCalculation = new UnusedDemandCalculation()
+        unusedDemandCalculation.setFreeSeats(initialFreeSeats)
+        unusedDemandCalculation.calculate({seats, type: SeatCategory.FIRST_CLASS})
+
+        const result = unusedDemandCalculation.calculate({seats, type: SeatCategory.BUSINESS})
+
+        expect(result).toBe(1)
+    })
 })
+
