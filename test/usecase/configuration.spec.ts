@@ -1,5 +1,7 @@
 import { CapacityCalculation } from "../../src/domain/calculation/capacity"
+import { ConfigurationCalculation } from "../../src/domain/calculation/configuration"
 import { DemandCalculation } from "../../src/domain/calculation/demand"
+import { UnusedDemandCalculation } from "../../src/domain/calculation/unused-demand"
 import { ConfigurationUsecase } from "../../src/usecase/configuration"
 
 describe('Configuration Usecase', () => {
@@ -11,8 +13,10 @@ describe('Configuration Usecase', () => {
 
         const capacityCalculation = new CapacityCalculation()
         const demandCalculation = new DemandCalculation()
+        const configurationCalculation = new ConfigurationCalculation()
+        const unusedDemandCalculation = new UnusedDemandCalculation()
 
-        const configurationUsecase = new ConfigurationUsecase(capacityCalculation, demandCalculation)
+        const configurationUsecase = new ConfigurationUsecase(capacityCalculation, demandCalculation, configurationCalculation, unusedDemandCalculation)
         const result = configurationUsecase.execute(seats, {economy, business, firstClass})
 
         expect(result).toEqual({
