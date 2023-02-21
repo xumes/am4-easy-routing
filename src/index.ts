@@ -1,7 +1,13 @@
-import { LoadAircraftUseCase } from "./usecase/loadAircraft";
+import express from "express"
+import bodyParser from "body-parser"
+import airplaneRoute from "./routes/airplanes"
 
-const listAirplanes = new LoadAircraftUseCase()
+const app = express()
+const port = process.env.PORT || 3000
 
-listAirplanes.carregaPorFabricante('Embraer').then(lista => {
-    console.table(lista)
+app.use(bodyParser.json())
+app.use("/api", airplaneRoute)
+
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
 })
