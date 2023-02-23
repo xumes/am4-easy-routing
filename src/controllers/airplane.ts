@@ -33,12 +33,16 @@ export const loadByManufacturer = async (req: Request, res:Response) => {
 export const loadByName = async (req: Request, res:Response) => {
   console.log("Headers", req.headers)
   try {
-    const loadAirplaneFactory = MakeLoadAirplanesUsecase.buildByName(pax)
-    const airplane = await loadAirplaneFactory.execute(req.params.name) as Airplane;
+    const airplane = await getAirplaneByName(req.params.name)
 
-    res.json(airplane);
+    res.json(airplane.getAircraft());
   } catch (err) {
     console.error(err);
     res.status(500).send("Internal Server Error");
   }
 };
+
+export const getAirplaneByName = async (name: string): Promise<Airplane> => {
+  const loadAirplaneFactory = MakeLoadAirplanesUsecase.buildByName(pax)
+  return await loadAirplaneFactory.execute(name) as Airplane;
+}
