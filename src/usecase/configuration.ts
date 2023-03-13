@@ -4,7 +4,7 @@ import { DemandCalculation } from "../domain/calculation/demand"
 import { UnusedDemandCalculation } from "../domain/calculation/unused-demand"
 import { SeatCategory } from "../shared/seat-category"
 
-type Demand = {
+export type Demand = {
     economy: number,
     business: number,
     firstClass: number
