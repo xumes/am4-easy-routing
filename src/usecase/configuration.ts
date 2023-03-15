@@ -10,7 +10,7 @@ export type Demand = {
     firstClass: number
 }
 
-type SuggestedConfig = {
+export type SuggestedConfig = {
     configHours: number,
     configuration: ConfigurationProps
 }
