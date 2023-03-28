@@ -32,7 +32,7 @@ export class PriceCalculation implements CalculationInterface<PriceProps> {
             result = this.calculateRealismMode(distance, type)
         }
 
-        return result 
+        return Math.floor(result)
     }
 
     private calculateEasyMode(distance: number, type: SeatCategory): number {

@@ -3,6 +3,7 @@ import { ConfigurationCalculation } from "../domain/calculation/configuration"
 import { DemandCalculation } from "../domain/calculation/demand"
 import { UnusedDemandCalculation } from "../domain/calculation/unused-demand"
 import { SeatCategory } from "../shared/seat-category"
+import { Price } from "./get-price-usecase"
 
 export type Demand = {
     economy: number,
@@ -10,7 +11,7 @@ export type Demand = {
     firstClass: number
 }
 
-type SuggestedConfig = {
+export type SuggestedConfig = {
     configHours: number,
     configuration: ConfigurationProps
 }
@@ -19,6 +20,26 @@ type ConfigurationProps = {
     aircrafts: number,
     fligtsPerDay: number,
     config: Demand[]
+}
+
+type Airport = {
+    ICAO: string,
+    IATA?: string,
+    airport: string,
+}
+
+export type AirplaneData = {
+    manufacturer: string,
+    name: string
+}
+
+export type ResponseConfig = {
+    airplane: AirplaneData,
+    departure: Airport,
+    arrival: Airport,
+    demand: Demand,
+    suggestedConfig: SuggestedConfig[],
+    price: Price
 }
 
 export class ConfigurationUsecase {
