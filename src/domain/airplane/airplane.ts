@@ -1,3 +1,5 @@
+import { NotFoundError } from "../../shared/not-found-error"
+
 export type AirplaneProps = {
     manufacturer: string,
     aircraft: string,
@@ -31,7 +33,7 @@ export class Airplane {
 
     getAircraft(): string {
         if (!this.props.aircraft) {
-            throw new Error('Missing aircraft name')
+            throw new NotFoundError("Missing aircraft name")
         }
 
         return this.props.aircraft

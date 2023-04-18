@@ -19,6 +19,7 @@ export type APIRoute = {
 
 export type APIStatus = {
     request: string,
+    description?: string,
     requests_remaining: number
 }
 

@@ -53,12 +53,12 @@ describe('Price calculation', () => {
 
     it('should return the price when correct values are provided', () => {
         const dataToTest = [
-            {gameMode: GameMode.EASY, distance: 10, type: SeatCategory.ECONOMY, expectedResult: 174.006},
-            {gameMode: GameMode.EASY, distance: 10, type: SeatCategory.BUSINESS, expectedResult: 568.006},
-            {gameMode: GameMode.EASY, distance: 10, type: SeatCategory.FIRST_CLASS, expectedResult: 1212.006},
-            {gameMode: GameMode.REALISM, distance: 10, type: SeatCategory.ECONOMY, expectedResult: 153.006},
-            {gameMode: GameMode.REALISM, distance: 10, type: SeatCategory.BUSINESS, expectedResult: 506.006},
-            {gameMode: GameMode.REALISM, distance: 10, type: SeatCategory.FIRST_CLASS, expectedResult: 1009.006},
+            {gameMode: GameMode.EASY, distance: 10, type: SeatCategory.ECONOMY, expectedResult: 174},
+            {gameMode: GameMode.EASY, distance: 10, type: SeatCategory.BUSINESS, expectedResult: 568},
+            {gameMode: GameMode.EASY, distance: 10, type: SeatCategory.FIRST_CLASS, expectedResult: 1212},
+            {gameMode: GameMode.REALISM, distance: 10, type: SeatCategory.ECONOMY, expectedResult: 153},
+            {gameMode: GameMode.REALISM, distance: 10, type: SeatCategory.BUSINESS, expectedResult: 506},
+            {gameMode: GameMode.REALISM, distance: 10, type: SeatCategory.FIRST_CLASS, expectedResult: 1009},
             {gameMode: GameMode.EASY, distance: 0, type: SeatCategory.ECONOMY, expectedResult: 170},
             {gameMode: GameMode.EASY, distance: 0, type: SeatCategory.BUSINESS, expectedResult: 560},
             {gameMode: GameMode.EASY, distance: 0, type: SeatCategory.FIRST_CLASS, expectedResult: 1200},
