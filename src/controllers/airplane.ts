@@ -1,10 +1,8 @@
 import {Request, Response} from "express"
-
-
 import pax from "../data/pax.json"
 import { MakeLoadAirplanesUsecase } from "./airplane-usecase-factories";
 import { Airplane } from "../domain/airplane/airplane";
-
+import { NotFoundError } from "../shared/not-found-error";
 
 export const load = async (req: Request, res:Response) => {
   try {
@@ -21,23 +19,28 @@ export const load = async (req: Request, res:Response) => {
 export const loadByManufacturer = async (req: Request, res:Response) => {
   try {
     const loadAllAirplanesFactory = MakeLoadAirplanesUsecase.buildByManufacturer(pax)
-    const airplanes = await loadAllAirplanesFactory.execute(req.params.manufacturer);
     
-    res.json(airplanes);
+    const airplanes = await loadAllAirplanesFactory.execute(req.params.manufacturer);
+    res.json(airplanes);  
+    
   } catch (err) {
-    console.error(err);
-    res.status(500).send("Internal Server Error");
+    if (err instanceof NotFoundError) {
+      res.status(404).json({message: err.message});
+      return
+    }
+    res.status(500).json({message: "Sorry, server error"});
   }
 };
 
 export const loadByName = async (req: Request, res:Response) => {
-  console.log("Headers", req.headers)
   try {
     const airplane = await getAirplaneByName(req.params.name)
-
-    res.json(airplane.getAircraft());
+    res.json(airplane?.getAircraft());
   } catch (err) {
-    console.error(err);
+    if (err instanceof NotFoundError) {
+      res.status(404).json({message: err.message});
+      return
+    }
     res.status(500).send("Internal Server Error");
   }
 };
