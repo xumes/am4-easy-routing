@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "build": "tsc",
-    "dev": "npm run build && node dist/src/index.js"
+    "dev": "npm run build && node dist/src/index.js",
+    "start": "node dist/src/index.js"
   },
   "keywords": [
     "node-js",
