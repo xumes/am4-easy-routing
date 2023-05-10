@@ -14,7 +14,7 @@ import { Airplane } from "../domain/airplane/airplane";
 import { APIResponse, RouteDemand } from "../services/route-demand-types";
 import { GetPriceUsecase, Price } from "../usecase/get-price-usecase";
 import { PriceCalculation } from "../domain/calculation/price";
-import slugify from "../services/slugify";
+import { slugify } from "../services/slugify";
 
 dotenv.config();
 
@@ -35,6 +35,10 @@ export const create = async (req: Request, res: Response) => {
   ) {
     return res.status(400).json({ message: "Invalid request data" });
   }
+
+  // se eu tiver as informações acima, eu gero o slug
+  const slug = createSlug(configurationProps)
+  console.log("Este é o meu slug", slug)
 
   // chamar nossa api para pegar dados da aeronave
   let airplane: Airplane;
@@ -91,12 +95,6 @@ export const create = async (req: Request, res: Response) => {
     };
   });
 
-  // create the slug
-  const slug = createSlug(configurationProps);
-  console.log("Slug desta chamada: ", slug);
-
-  // save the slug in the database
-
   res.json(airportConfigurations);
 };
 
@@ -146,10 +144,10 @@ const getPrice = (gameMode: GameMode, distance: number): Price => {
 };
 
 const createSlug = (configurationProps: configurationProps): string => {
-  return slugify(
-    `${configurationProps.gameMode}-${configurationProps.departureICAO}-${configurationProps.airplaneName}`
-  );
-};
+  const {gameMode, departureICAO, airplaneName} = configurationProps
+
+  return slugify(`${gameMode}-${departureICAO}-${airplaneName}`)
+}
 
 // Gravar no banco de dados
 // Ler do banco antes de fazer a chamada

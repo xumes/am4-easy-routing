@@ -1,5 +1,5 @@
-import slug from "slug";
+import slug from "slug"
 
-export default function slugify(text: string): string {
-  return slug(text, { lower: true });
+export const slugify = (text: string): string => {
+    return slug(text)
 }
