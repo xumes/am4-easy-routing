@@ -15,6 +15,7 @@ import { APIResponse, RouteDemand } from "../services/route-demand-types";
 import { GetPriceUsecase, Price } from "../usecase/get-price-usecase";
 import { PriceCalculation } from "../domain/calculation/price";
 import { slugify } from "../services/slugify";
+import { RedisService } from "../services/redis-service";
 
 dotenv.config();
 
@@ -38,7 +39,11 @@ export const create = async (req: Request, res: Response) => {
 
   // se eu tiver as informações acima, eu gero o slug
   const slug = createSlug(configurationProps)
-  console.log("Este é o meu slug", slug)
+  const existingConfiguration = await getExistingConfiguration(slug)
+  if (existingConfiguration) {
+    res.status(200).json(existingConfiguration)
+    return
+  }
 
   // chamar nossa api para pegar dados da aeronave
   let airplane: Airplane;
@@ -95,6 +100,9 @@ export const create = async (req: Request, res: Response) => {
     };
   });
 
+  // grava o resultado no Redis
+  await saveConfiguration(slug, airportConfigurations)
+
   res.json(airportConfigurations);
 };
 
@@ -149,5 +157,21 @@ const createSlug = (configurationProps: configurationProps): string => {
   return slugify(`${gameMode}-${departureICAO}-${airplaneName}`)
 }
 
-// Gravar no banco de dados
-// Ler do banco antes de fazer a chamada
+const saveConfiguration = async (slug: string, configurations: ResponseConfig[]): Promise<void> => {
+  const TWO_MONTHS = 60 * 60 * 24 * 30.44 * 2;
+
+  const redisService = RedisService.getInstance()
+  await redisService.set(slug, JSON.stringify(configurations), TWO_MONTHS)
+}
+
+const getExistingConfiguration = async (slug: string): Promise<ResponseConfig[] | null> => {
+  const redisService = RedisService.getInstance()
+  const configurations = await redisService.get(slug)
+
+  if (!configurations) {
+    return null
+  }
+
+  return JSON.parse(configurations)
+}
+

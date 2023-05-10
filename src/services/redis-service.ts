@@ -1,7 +1,8 @@
 import Redis from "ioredis"
 
 export class RedisService {
-    redisClient: Redis
+    private redisClient: Redis
+    private static instance: RedisService
 
     constructor() {
         this.redisClient = new Redis({
@@ -12,12 +13,24 @@ export class RedisService {
         })
     }
 
+    static getInstance(): RedisService {
+        if (!RedisService.instance) {
+            RedisService.instance = new RedisService()
+        }
 
-    async save(key: string, value: string): Promise<void> {
-        await this.redisClient.set(key, value)
+        return RedisService.instance
     }
 
-    async read(key: string): Promise<string | null> {
+
+    async set(key: string, value: string, expiringInSeconds?: number): Promise<void> {
+        if (expiringInSeconds) {
+            await this.redisClient.set(key, value, 'EX', expiringInSeconds)
+        } else {
+            await this.redisClient.set(key, value)
+        }
+    }
+
+    async get(key: string): Promise<string | null> {
        return await this.redisClient.get(key)
     }
 }
